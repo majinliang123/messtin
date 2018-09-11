@@ -13,7 +13,7 @@ import java.util.*;
  *
  * @author majinliang
  */
-public class ClassUtil {
+public final class ClassUtil {
 
     /**
      * Get all the classes in the package.
