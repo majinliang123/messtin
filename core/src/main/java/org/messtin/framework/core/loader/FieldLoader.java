@@ -1,7 +1,14 @@
 package org.messtin.framework.core.loader;
 
+import org.messtin.framework.core.annotation.Autowired;
+import org.messtin.framework.core.container.BeanContainer;
+import org.messtin.framework.core.exception.IllegalBeanNameException;
 import org.messtin.framework.core.loader.iface.MesstinLoader;
+import org.messtin.framework.core.util.AnnotationUtil;
+import org.messtin.framework.core.util.ClassUtil;
+import org.messtin.framework.core.util.StringUtil;
 
+import java.lang.reflect.Field;
 import java.util.Set;
 
 /**
@@ -14,8 +21,25 @@ import java.util.Set;
  * @author majinliang
  */
 public class FieldLoader implements MesstinLoader {
+
     @Override
-    public void load(Set<Class<?>> clazzs) {
+    public void load(Set<Class<?>> clazzs) throws IllegalBeanNameException, IllegalAccessException {
+        for (Class<?> clazz : clazzs) {
+            if (!AnnotationUtil.hasBeanAnnotation(clazz)) {
+                return;
+            }
+            Field[] fields = clazz.getDeclaredFields();
+            Object bean = BeanContainer.get(clazz);
+            for (Field field : fields) {
+                if (!AnnotationUtil.hasAutowiredAnnotation(field)) {
+                    continue;
+                }
+                if (!field.isAccessible()) {
+                    field.setAccessible(true);
+                }
+                field.set(bean, BeanContainer.get(field.getType()));
+            }
+        }
 
     }
 }

@@ -9,13 +9,13 @@ import java.lang.annotation.Target;
  * When a field has this function, it will set corresponding value
  * if it existed at {@link org.messtin.framework.core.container.BeanContainer}.
  * The class of this field <strong>must</strong> have annotation {@link Bean}
- *
+ * <p>
  * In the future, it will support inject value into function
  *
  * @author majinliang
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
+@Target(ElementType.FIELD)
 public @interface Autowired {
     String value() default "";
 }

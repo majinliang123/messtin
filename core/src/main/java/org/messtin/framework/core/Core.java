@@ -19,12 +19,13 @@ public final class Core {
      */
     private static boolean INITIALIZED = false;
 
-    public static void init(String... packets) throws Exception {
+    public static Context init(String... packets) throws Exception {
         logger.info("Start messtin core");
         if (!INITIALIZED) {
             Init.init(packets);
             setInitialized();
             logger.info("Initialize messtin core successfully. And set `INITIALIZED` as true.");
+            return new Context();
         } else {
             throw new CoreInitException("The project has been initialized.");
         }

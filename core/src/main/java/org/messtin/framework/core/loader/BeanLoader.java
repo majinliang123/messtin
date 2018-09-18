@@ -1,6 +1,7 @@
 package org.messtin.framework.core.loader;
 
 import org.messtin.framework.core.container.BeanContainer;
+import org.messtin.framework.core.exception.IllegalBeanNameException;
 import org.messtin.framework.core.loader.iface.MesstinLoader;
 import org.messtin.framework.core.util.AnnotationUtil;
 
@@ -15,9 +16,11 @@ import java.util.Set;
 public class BeanLoader implements MesstinLoader {
 
     @Override
-    public void load(Set<Class<?>> clazzs){
-        clazzs.stream()
-                .filter(AnnotationUtil::hasBeanAnnotation)
-                .forEach(BeanContainer::put);
+    public void load(Set<Class<?>> clazzs) throws IllegalAccessException, InstantiationException, IllegalBeanNameException {
+        for (Class<?> clazz : clazzs) {
+            if (AnnotationUtil.hasBeanAnnotation(clazz)) {
+                BeanContainer.put(clazz);
+            }
+        }
     }
 }
