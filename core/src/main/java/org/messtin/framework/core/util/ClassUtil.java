@@ -4,6 +4,7 @@ import org.messtin.framework.core.config.Constants;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Modifier;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.*;
@@ -76,5 +77,24 @@ public final class ClassUtil {
         }
     }
 
+    /**
+     * Check if the clazz is an abstract class
+     *
+     * @param clazz the class need check
+     * @return if the clazz is an abstract class.
+     */
+    public static boolean isAbstractClass(Class<?> clazz) {
+        int modifier = clazz.getModifiers();
+        return Modifier.isAbstract(modifier);
+    }
 
+    /**
+     * Check if the clazz is an interface
+     * @param clazz the class need check
+     * @return if the clazz is an interface
+     */
+    public static boolean isInterface(Class<?> clazz) {
+        int modifier = clazz.getModifiers();
+        return Modifier.isInterface(modifier);
+    }
 }

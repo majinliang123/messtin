@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * When a field has this function, it will set corresponding value
+ * When a field has this annotation, it will set corresponding value
  * if it existed at {@link org.messtin.framework.core.container.BeanContainer}.
  * The class of this field <strong>must</strong> have annotation {@link Bean}
  * <p>

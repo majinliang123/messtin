@@ -1,9 +1,12 @@
 package org.messtin.framework.core.util;
 
+import org.messtin.framework.core.annotation.Aspect;
 import org.messtin.framework.core.annotation.Autowired;
 import org.messtin.framework.core.annotation.Bean;
+import org.messtin.framework.core.annotation.PointCut;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 /**
  * The util of annotation.
@@ -15,7 +18,7 @@ public final class AnnotationUtil {
 
     /**
      * @param clazz
-     * @return if the {@link Class} has {@link org.messtin.framework.core.annotation.Bean}
+     * @return if the {@link Class} has {@link Bean} annotation.
      */
     public static boolean hasBeanAnnotation(Class<?> clazz) {
         return clazz.isAnnotationPresent(Bean.class);
@@ -23,9 +26,25 @@ public final class AnnotationUtil {
 
     /**
      * @param field
-     * @return if the {@link Field} has {@link org.messtin.framework.core.annotation.Autowired}
+     * @return if the {@link Field} has {@link Autowired} annotation.
      */
     public static boolean hasAutowiredAnnotation(Field field) {
         return field.isAnnotationPresent(Autowired.class);
+    }
+
+    /**
+     * @param clazz
+     * @return if the {@link Class} has {@link Aspect} annotation.
+     */
+    public static boolean hasAspectAnnotation(Class<?> clazz) {
+        return clazz.isAnnotationPresent(Aspect.class);
+    }
+
+    /**
+     * @param method
+     * @return if the {@link Method} has {@link PointCut} annotation.
+     */
+    public static boolean hasPointCutAnnotation(Method method) {
+        return method.isAnnotationPresent(PointCut.class);
     }
 }

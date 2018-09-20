@@ -6,16 +6,11 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * When a class has this annotation,
- * will generate a singleton instance and put it into
- * {@link org.messtin.framework.core.container.BeanContainer}.
- * <p>
- * This annotation should put above a class but an abstracted class or interface.
+ * When a class has this annotation, it means the class is an aspect.
  *
  * @author majinliang
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface Bean {
-    String value() default "";
+public @interface Aspect {
 }

@@ -4,6 +4,7 @@ package org.messtin.framework.core.container;
 import org.messtin.framework.core.annotation.Bean;
 import org.messtin.framework.core.exception.BeanConflictException;
 import org.messtin.framework.core.exception.IllegalBeanNameException;
+import org.messtin.framework.core.util.ClassUtil;
 import org.messtin.framework.core.util.StringUtil;
 
 import java.util.HashMap;
@@ -15,7 +16,7 @@ import java.util.Map;
  *
  * @author majinliang
  */
-public class BeanContainer {
+public final class BeanContainer {
     /**
      * The container of the bean and its info.
      * bean name -> {bean class name -> bean instance}
@@ -37,6 +38,12 @@ public class BeanContainer {
     public static void put(Class<?> clazz) throws IllegalBeanNameException, IllegalAccessException, InstantiationException {
         Bean beanAnnotation = clazz.getDeclaredAnnotation(Bean.class);
         if (StringUtil.isNullOrEmpty(beanAnnotation)) {
+            return;
+        }
+        if (ClassUtil.isAbstractClass(clazz)) {
+            return;
+        }
+        if (ClassUtil.isInterface(clazz)) {
             return;
         }
         String beanName = beanAnnotation.value();
