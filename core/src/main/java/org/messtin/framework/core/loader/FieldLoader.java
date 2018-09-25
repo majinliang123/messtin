@@ -1,12 +1,9 @@
 package org.messtin.framework.core.loader;
 
-import org.messtin.framework.core.annotation.Autowired;
 import org.messtin.framework.core.container.BeanContainer;
 import org.messtin.framework.core.exception.IllegalBeanNameException;
 import org.messtin.framework.core.loader.iface.MesstinLoader;
 import org.messtin.framework.core.util.AnnotationUtil;
-import org.messtin.framework.core.util.ClassUtil;
-import org.messtin.framework.core.util.StringUtil;
 
 import java.lang.reflect.Field;
 import java.util.Set;

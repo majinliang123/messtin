@@ -3,10 +3,8 @@ package org.messtin.framework.core.util;
 import org.messtin.framework.core.annotation.Aspect;
 import org.messtin.framework.core.annotation.Autowired;
 import org.messtin.framework.core.annotation.Bean;
-import org.messtin.framework.core.annotation.PointCut;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 /**
  * The util of annotation.
@@ -38,13 +36,5 @@ public final class AnnotationUtil {
      */
     public static boolean hasAspectAnnotation(Class<?> clazz) {
         return clazz.isAnnotationPresent(Aspect.class);
-    }
-
-    /**
-     * @param method
-     * @return if the {@link Method} has {@link PointCut} annotation.
-     */
-    public static boolean hasPointCutAnnotation(Method method) {
-        return method.isAnnotationPresent(PointCut.class);
     }
 }

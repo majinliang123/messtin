@@ -1,4 +1,4 @@
-package app;
+package app.bean;
 
 import org.messtin.framework.core.annotation.Bean;
 

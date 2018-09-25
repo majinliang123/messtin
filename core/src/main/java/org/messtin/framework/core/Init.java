@@ -2,6 +2,7 @@ package org.messtin.framework.core;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.messtin.framework.core.loader.AspectLoader;
 import org.messtin.framework.core.loader.BeanLoader;
 import org.messtin.framework.core.loader.FieldLoader;
 import org.messtin.framework.core.loader.iface.MesstinLoader;
@@ -19,11 +20,14 @@ public final class Init {
     /**
      * The loader list.
      * There are sequence among those loaders,
-     * {@link BeanLoader} should first load.
+     * 1. {@link AspectLoader}.
+     * 2. {@link BeanLoader}.
+     * 3. {@link FieldLoader}.
      * Then other loaders could load.
      */
     private static final List<Class<? extends MesstinLoader>> loaders =
             new ArrayList<Class<? extends MesstinLoader>>() {{
+                add(AspectLoader.class);
                 add(BeanLoader.class);
                 add(FieldLoader.class);
             }};

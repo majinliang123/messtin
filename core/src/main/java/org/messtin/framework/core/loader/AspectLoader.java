@@ -1,5 +1,6 @@
 package org.messtin.framework.core.loader;
 
+import org.messtin.framework.core.container.AspectContainer;
 import org.messtin.framework.core.exception.IllegalBeanNameException;
 import org.messtin.framework.core.loader.iface.MesstinLoader;
 
@@ -10,12 +11,11 @@ import java.util.Set;
  *
  * @author majinliang
  */
-public class AspectLoder implements MesstinLoader {
+public class AspectLoader implements MesstinLoader {
     @Override
     public void load(Set<Class<?>> clazzs) throws IllegalAccessException, InstantiationException, IllegalBeanNameException {
-        for (Class<?> clazz: clazzs){
-
-
+        for (Class<?> clazz : clazzs) {
+            AspectContainer.put(clazz);
         }
     }
 }

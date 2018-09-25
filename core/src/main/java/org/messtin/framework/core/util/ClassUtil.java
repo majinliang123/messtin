@@ -4,7 +4,9 @@ import org.messtin.framework.core.config.Constants;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.Parameter;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.*;
@@ -90,11 +92,31 @@ public final class ClassUtil {
 
     /**
      * Check if the clazz is an interface
+     *
      * @param clazz the class need check
      * @return if the clazz is an interface
      */
     public static boolean isInterface(Class<?> clazz) {
         int modifier = clazz.getModifiers();
         return Modifier.isInterface(modifier);
+    }
+
+    /**
+     * Get the full name of the method.
+     * classname.methodname(paramType paramName)
+     *
+     * @param method
+     * @return
+     */
+    public static String getMethodUnionKey(Method method) {
+        Class<?> clazz = method.getDeclaringClass();
+        String clazzName = clazz.getName();
+        String methodName = method.getName();
+        Parameter[] parameters = method.getParameters();
+        List<String> paramList = new ArrayList<>();
+        for (Parameter parameter : parameters) {
+            paramList.add(parameter.getType() + " " + parameter.getName());
+        }
+        return clazzName + "." + methodName + "(" + String.join(",", paramList) + ")";
     }
 }

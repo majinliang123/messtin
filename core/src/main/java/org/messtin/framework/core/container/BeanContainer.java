@@ -4,6 +4,7 @@ package org.messtin.framework.core.container;
 import org.messtin.framework.core.annotation.Bean;
 import org.messtin.framework.core.exception.BeanConflictException;
 import org.messtin.framework.core.exception.IllegalBeanNameException;
+import org.messtin.framework.core.proxy.CGlibProxy;
 import org.messtin.framework.core.util.ClassUtil;
 import org.messtin.framework.core.util.StringUtil;
 
@@ -55,7 +56,9 @@ public final class BeanContainer {
         if (beanMap == null) {
             beanMap = new HashMap<>();
         }
-        beanMap.put(clazzName, clazz.newInstance());
+        CGlibProxy proxy = new CGlibProxy();
+        Object instance = proxy.getProxy(clazz);
+        beanMap.put(clazzName, instance);
         beanContainer.put(beanName, beanMap);
     }
 

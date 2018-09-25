@@ -5,9 +5,7 @@ import org.messtin.framework.core.util.AnnotationUtil;
 import org.messtin.framework.core.util.ClassUtil;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * The container of {@link AspectEntity}.
@@ -18,10 +16,8 @@ public final class AspectContainer {
 
     /**
      * The container of {@link AspectEntity}.
-     * method path -> aspect entity list.
-     * One method could have one or more {@link AspectEntity}.
      */
-    private static final Map<String, List<AspectEntity>> aspectContainer = new HashMap<>();
+    private static final List<AspectEntity> CONTAINER = new ArrayList<>();
 
     /**
      * Put the {@link AspectEntity} into container.
@@ -40,22 +36,11 @@ public final class AspectContainer {
         if (ClassUtil.isInterface(clazz)) {
             return;
         }
-        List<AspectEntity> aspectEntities = AspectEntity.of(clazz);
-        for (AspectEntity aspectEntity : aspectEntities) {
-            String method = "";
-            if (aspectContainer.containsKey(method)) {
-                aspectEntities = aspectContainer.get(method);
-            } else {
-                aspectEntities = new ArrayList<>();
-                aspectContainer.put(method, aspectEntities);
-            }
-            aspectEntities.add(aspectEntity);
-        }
-
-
+        AspectEntity entity = AspectEntity.of(clazz);
+        CONTAINER.add(entity);
     }
 
-    public static List<AspectEntity> get(String method) {
-        return aspectContainer.get(method);
+    public static List<AspectEntity> getAllAspectEntities() {
+        return CONTAINER;
     }
 }

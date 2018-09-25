@@ -1,5 +1,6 @@
 package app;
 
+import app.bean.House;
 import org.messtin.framework.core.Context;
 import org.messtin.framework.core.Core;
 
