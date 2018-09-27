@@ -17,7 +17,7 @@ public abstract class AbstractAspect {
 
     }
 
-    public Object afterMethod() {
-        return null;
+    public Object afterMethod(Object o) {
+        return o;
     }
 }

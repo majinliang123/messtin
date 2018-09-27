@@ -1,5 +1,6 @@
 package org.messtin.framework.core.container;
 
+import org.messtin.framework.core.aspect.AbstractAspect;
 import org.messtin.framework.core.entity.AspectEntity;
 import org.messtin.framework.core.util.AnnotationUtil;
 import org.messtin.framework.core.util.ClassUtil;
@@ -34,6 +35,9 @@ public final class AspectContainer {
             return;
         }
         if (ClassUtil.isInterface(clazz)) {
+            return;
+        }
+        if (!AbstractAspect.class.isAssignableFrom(clazz)){
             return;
         }
         AspectEntity entity = AspectEntity.of(clazz);

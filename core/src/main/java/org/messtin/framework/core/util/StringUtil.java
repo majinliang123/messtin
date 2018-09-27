@@ -49,14 +49,4 @@ public final class StringUtil {
             return true;
         }
     }
-
-    /**
-     * @param original the {@link String} we want to check.
-     * @param target the {@link String} of regex.
-     * @return if the original matches the target regex.
-     */
-    public static boolean isAntMatch(String original, String target){
-//        return Pattern.matches(target, original); // just for test.
-        return original.contains("String") || original.contains("House");
-    }
 }

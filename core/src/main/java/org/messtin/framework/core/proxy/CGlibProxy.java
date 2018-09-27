@@ -8,6 +8,7 @@ import org.messtin.framework.core.container.AspectContainer;
 import org.messtin.framework.core.container.InterceptorContainer;
 import org.messtin.framework.core.entity.AspectEntity;
 import org.messtin.framework.core.util.AnnotationUtil;
+import org.messtin.framework.core.util.AntUtil;
 import org.messtin.framework.core.util.ClassUtil;
 import org.messtin.framework.core.util.StringUtil;
 
@@ -59,12 +60,12 @@ public class CGlibProxy implements MethodInterceptor {
             if (!AnnotationUtil.hasBeanAnnotation(clazz)) {
                 continue;
             }
-            if (!StringUtil.isAntMatch(clazz.getName(), aspectEntity.getClazzPath())) {
+            if (!AntUtil.isAntMatch(clazz.getName(), aspectEntity.getClazzPath())) {
                 continue;
             }
             Method[] methods = clazz.getDeclaredMethods();
             for (Method method : methods) {
-                if (!StringUtil.isAntMatch(method.getName(), aspectEntity.getMethodPath())) {
+                if (!AntUtil.isAntMatch(method.getName(), aspectEntity.getMethodPath())) {
                     continue;
                 }
                 isNeed = true;
@@ -102,6 +103,9 @@ public class CGlibProxy implements MethodInterceptor {
         Object result = methodProxy.invokeSuper(o, objects);
         for (AbstractAspect aspect : abstractAspects) {
             aspect.beforeMethodReturn();
+        }
+        for (AbstractAspect aspect : abstractAspects) {
+            result = aspect.afterMethod(result);
         }
         return result;
     }

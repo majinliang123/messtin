@@ -9,4 +9,5 @@ package org.messtin.framework.core.config;
  * @author majinliang
  */
 public class Config {
+    public static String DEFAULT_PATH_SEPARATOR = "/";
 }

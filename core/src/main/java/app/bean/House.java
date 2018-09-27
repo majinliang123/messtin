@@ -19,6 +19,7 @@ public class House {
 
     @Override
     public String toString() {
+        System.out.println("To String method.");
         return "House{" +
                 "airCondition=" + airCondition +
                 '}';
