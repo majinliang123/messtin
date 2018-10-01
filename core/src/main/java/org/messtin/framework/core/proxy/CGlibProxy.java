@@ -10,7 +10,6 @@ import org.messtin.framework.core.entity.AspectEntity;
 import org.messtin.framework.core.util.AnnotationUtil;
 import org.messtin.framework.core.util.AntUtil;
 import org.messtin.framework.core.util.ClassUtil;
-import org.messtin.framework.core.util.StringUtil;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;

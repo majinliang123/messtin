@@ -26,38 +26,17 @@ public final class BeanContainer {
             new HashMap<>();
 
     /**
-     * Put the instance of clazz into {@link #beanContainer}.
-     * Use the {@link Bean#value()} as bean name.
-     * Use the {@link Class#getName()} as its bean class name.
-     * Create instance of clazz as its bean instance.
+     * Put the instance into {@link #beanContainer}
      *
-     * @param clazz
-     * @throws IllegalBeanNameException the exception when {@link Bean#value()} is null or empty string.
-     * @throws IllegalAccessException   the exception when failed create bean instance
-     * @throws InstantiationException   the exception when failed create bean instance
+     * @param beanName
+     * @param clazzName
+     * @param instance
      */
-    public static void put(Class<?> clazz) throws IllegalBeanNameException, IllegalAccessException, InstantiationException {
-        Bean beanAnnotation = clazz.getDeclaredAnnotation(Bean.class);
-        if (StringUtil.isNullOrEmpty(beanAnnotation)) {
-            return;
-        }
-        if (ClassUtil.isAbstractClass(clazz)) {
-            return;
-        }
-        if (ClassUtil.isInterface(clazz)) {
-            return;
-        }
-        String beanName = beanAnnotation.value();
-        if (StringUtil.isNullOrEmpty(beanName)) {
-            throw new IllegalBeanNameException("The bean name is illegal. It is null or empty");
-        }
-        String clazzName = clazz.getName();
+    public static void put(String beanName, String clazzName, Object instance){
         Map<String, Object> beanMap = beanContainer.get(beanName);
         if (beanMap == null) {
             beanMap = new HashMap<>();
         }
-        CGlibProxy proxy = new CGlibProxy();
-        Object instance = proxy.getProxy(clazz);
         beanMap.put(clazzName, instance);
         beanContainer.put(beanName, beanMap);
     }
@@ -106,5 +85,25 @@ public final class BeanContainer {
             throw new BeanConflictException("There are " + beanMap.size() + " in the bean container.");
         }
         return beanMap.values().iterator().next();
+    }
+
+    /**
+     * Get bean object from container according to bean name and clazz.
+     *
+     * @param beanName the bean name of the bean in {@link #beanContainer}
+     * @return the object we found from bean container.
+     * @throws IllegalBeanNameException the exception when the bean name is null or empty string.
+     * @throws BeanConflictException    the exception when we get more than one bean object from container.
+     */
+    public static Object get(String beanName, Class<?> clazz) throws IllegalBeanNameException {
+        if (StringUtil.isNullOrEmpty(beanName)) {
+            throw new IllegalBeanNameException("The bean name is illegal. It is null or empty");
+        }
+        Map<String, Object> beanMap = beanContainer.get(beanName);
+        if (StringUtil.isNullOrEmpty(beanName)) {
+            return null;
+        }
+        String clazzName = clazz.getName();
+        return beanMap.get(clazzName);
     }
 }

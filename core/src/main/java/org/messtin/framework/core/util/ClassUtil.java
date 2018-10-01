@@ -119,4 +119,12 @@ public final class ClassUtil {
         }
         return clazzName + "." + methodName + "(" + String.join(",", paramList) + ")";
     }
+
+    /**
+     * @param method
+     * @return if the {@link Method} has return value.
+     */
+    public static boolean hasReturnValue(Method method) {
+        return !StringUtil.isNullOrEmpty(method.getReturnType());
+    }
 }

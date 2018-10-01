@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.messtin.framework.core.loader.AspectLoader;
 import org.messtin.framework.core.loader.BeanLoader;
 import org.messtin.framework.core.loader.FieldLoader;
+import org.messtin.framework.core.loader.MethodLoader;
 import org.messtin.framework.core.loader.iface.MesstinLoader;
 import org.messtin.framework.core.util.ClassUtil;
 
@@ -29,6 +30,7 @@ public final class Init {
             new ArrayList<Class<? extends MesstinLoader>>() {{
                 add(AspectLoader.class);
                 add(BeanLoader.class);
+                add(MethodLoader.class);
                 add(FieldLoader.class);
             }};
 

@@ -5,6 +5,7 @@ import org.messtin.framework.core.annotation.Autowired;
 import org.messtin.framework.core.annotation.Bean;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 /**
  * The util of annotation.
@@ -20,6 +21,14 @@ public final class AnnotationUtil {
      */
     public static boolean hasBeanAnnotation(Class<?> clazz) {
         return clazz.isAnnotationPresent(Bean.class);
+    }
+
+    /**
+     * @param method
+     * @return if the {@link Method} has {@link Bean} annotation.
+     */
+    public static boolean hasBeanAnnotation(Method method){
+        return method.isAnnotationPresent(Bean.class);
     }
 
     /**

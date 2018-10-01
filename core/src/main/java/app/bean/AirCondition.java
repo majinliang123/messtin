@@ -31,4 +31,9 @@ public class AirCondition {
                 ", name='" + name + '\'' +
                 '}';
     }
+
+    @Bean("key")
+    public String getKey(){
+        return price + name;
+    }
 }

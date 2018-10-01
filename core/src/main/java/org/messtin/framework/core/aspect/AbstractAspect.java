@@ -10,11 +10,9 @@ package org.messtin.framework.core.aspect;
 public abstract class AbstractAspect {
 
     public void beforeMethod() {
-
     }
 
     public void beforeMethodReturn() {
-
     }
 
     public Object afterMethod(Object o) {

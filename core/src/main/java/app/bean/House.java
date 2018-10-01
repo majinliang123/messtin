@@ -9,6 +9,9 @@ public class House {
     @Autowired("AirCondition")
     public AirCondition airCondition;
 
+    @Autowired("key")
+    private String key;
+
     public AirCondition getAirCondition() {
         return airCondition;
     }
@@ -19,9 +22,9 @@ public class House {
 
     @Override
     public String toString() {
-        System.out.println("To String method.");
         return "House{" +
                 "airCondition=" + airCondition +
+                ", key='" + key + '\'' +
                 '}';
     }
 }

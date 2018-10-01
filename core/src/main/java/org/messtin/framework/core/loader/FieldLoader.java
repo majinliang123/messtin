@@ -1,5 +1,6 @@
 package org.messtin.framework.core.loader;
 
+import org.messtin.framework.core.annotation.Autowired;
 import org.messtin.framework.core.container.BeanContainer;
 import org.messtin.framework.core.exception.IllegalBeanNameException;
 import org.messtin.framework.core.loader.iface.MesstinLoader;
@@ -34,7 +35,9 @@ public class FieldLoader implements MesstinLoader {
                 if (!field.isAccessible()) {
                     field.setAccessible(true);
                 }
-                field.set(bean, BeanContainer.get(field.getType()));
+
+                Autowired autowired = field.getAnnotation(Autowired.class);
+                field.set(bean, BeanContainer.get(autowired.value(), field.getType()));
             }
         }
 
