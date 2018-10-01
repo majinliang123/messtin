@@ -4,6 +4,8 @@ import org.messtin.framework.core.annotation.Bean;
 import org.messtin.framework.core.container.BeanContainer;
 import org.messtin.framework.core.exception.IllegalBeanNameException;
 import org.messtin.framework.core.loader.iface.MesstinLoader;
+import org.messtin.framework.core.proxy.AbstractProxy;
+import org.messtin.framework.core.proxy.MethodBeanProxy;
 import org.messtin.framework.core.util.AnnotationUtil;
 import org.messtin.framework.core.util.ClassUtil;
 
@@ -21,17 +23,17 @@ import java.util.Set;
 public class MethodLoader implements MesstinLoader {
 
     @Override
-    public void load(Set<Class<?>> clazzs) throws IllegalBeanNameException, InvocationTargetException, IllegalAccessException {
+    public void load(Set<Class<?>> clazzs) throws IllegalBeanNameException, InvocationTargetException, IllegalAccessException, InstantiationException {
 
         for (Class<?> clazz : clazzs) {
             if (!AnnotationUtil.hasBeanAnnotation(clazz)) {
                 continue;
             }
             if (ClassUtil.isAbstractClass(clazz)) {
-                return;
+                continue;
             }
             if (ClassUtil.isInterface(clazz)) {
-                return;
+                continue;
             }
 
             Method[] methods = clazz.getDeclaredMethods();
@@ -53,6 +55,13 @@ public class MethodLoader implements MesstinLoader {
                 Object result = method.invoke(bean, new Object[]{});
                 BeanContainer.put(beanName, clazzName, result);
             }
+
+            AbstractProxy proxy = new MethodBeanProxy();
+            Object instance = proxy.getProxy(clazz);
+            Bean annotation = clazz.getAnnotation(Bean.class);
+            String beanName = annotation.value();
+            String clazzName = clazz.getName();
+            BeanContainer.put(beanName, clazzName, instance);
         }
     }
 }

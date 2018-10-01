@@ -34,6 +34,7 @@ public class AirCondition {
 
     @Bean("key")
     public String getKey(){
+        System.out.println(11);
         return price + name;
     }
 }

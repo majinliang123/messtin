@@ -22,6 +22,7 @@ public class House {
 
     @Override
     public String toString() {
+        airCondition.getKey();
         return "House{" +
                 "airCondition=" + airCondition +
                 ", key='" + key + '\'' +

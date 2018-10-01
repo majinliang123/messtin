@@ -6,6 +6,7 @@ import org.messtin.framework.core.annotation.Bean;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 /**
  * The util of annotation.
@@ -45,5 +46,15 @@ public final class AnnotationUtil {
      */
     public static boolean hasAspectAnnotation(Class<?> clazz) {
         return clazz.isAnnotationPresent(Aspect.class);
+    }
+
+    /**
+     * @param clazz
+     * @return if the class have bean method.
+     */
+    public static boolean hasBeanMethod(Class<?> clazz){
+        Method[] methods = clazz.getDeclaredMethods();
+        return Arrays.stream(methods)
+                .anyMatch(AnnotationUtil::hasBeanAnnotation);
     }
 }

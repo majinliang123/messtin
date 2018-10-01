@@ -1,7 +1,5 @@
 package org.messtin.framework.core.proxy;
 
-import net.sf.cglib.proxy.Enhancer;
-import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 import org.messtin.framework.core.aspect.AbstractAspect;
 import org.messtin.framework.core.container.AspectContainer;
@@ -9,7 +7,6 @@ import org.messtin.framework.core.container.InterceptorContainer;
 import org.messtin.framework.core.entity.AspectEntity;
 import org.messtin.framework.core.util.AnnotationUtil;
 import org.messtin.framework.core.util.AntUtil;
-import org.messtin.framework.core.util.ClassUtil;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -20,30 +17,7 @@ import java.util.List;
  *
  * @author majinliang
  */
-public class CGlibProxy implements MethodInterceptor {
-    /**
-     * Get the proxy of clazz.
-     * The core for AOP.
-     *
-     * @param clazz
-     * @return the proxy of clazz.
-     */
-    public Object getProxy(Class<?> clazz) throws InstantiationException, IllegalAccessException {
-        if (ClassUtil.isAbstractClass(clazz)) {
-            return null;
-        }
-        if (ClassUtil.isInterface(clazz)) {
-            return null;
-        }
-        if (!isNeedProxy(clazz)) {
-            return clazz.newInstance();
-        }
-        Enhancer enhancer = new Enhancer();
-        enhancer.setSuperclass(clazz);
-        enhancer.setCallback(this);
-        return enhancer.create();
-    }
-
+public class CGlibProxy extends AbstractProxy {
     /**
      * Check if the clazz need a proxy.
      * When there are some {@link AspectEntity} in {@link AspectContainer},
@@ -52,6 +26,7 @@ public class CGlibProxy implements MethodInterceptor {
      * @param clazz
      * @return if the clazz need a proxy.
      */
+    @Override
     public boolean isNeedProxy(Class<?> clazz) {
         boolean isNeed = false;
         List<AspectEntity> aspectEntityList = AspectContainer.getAllAspectEntities();
