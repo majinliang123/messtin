@@ -14,5 +14,4 @@ public interface Constants {
     String COMMA = ",";
 
     String UTF_8 = "UTF-8";
-
 }

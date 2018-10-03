@@ -127,4 +127,30 @@ public final class ClassUtil {
     public static boolean hasReturnValue(Method method) {
         return !StringUtil.isNullOrEmpty(method.getReturnType());
     }
+
+    public static boolean isPrimitive(Object o) {
+        if (o instanceof Byte) {
+            return true;
+        }
+        if (o instanceof Character) {
+            return true;
+        }
+        if (o instanceof Integer) {
+            return true;
+        }
+        if (o instanceof Long) {
+            return true;
+        }
+        if (o instanceof Float) {
+            return true;
+        }
+        if (o instanceof Double) {
+            return true;
+        }
+        if (o instanceof Boolean) {
+            return true;
+        }
+        return false;
+
+    }
 }

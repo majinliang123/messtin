@@ -3,6 +3,7 @@ package org.messtin.framework.web.entity;
 import org.messtin.framework.web.adapter.iface.Adapter;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 
 /**
  * The entity for mvc.
@@ -16,6 +17,7 @@ public class MvcEntity {
     private Object bean;
     private Adapter adapter;
     private String path;
+    private Parameter[] parameters;
 
     public Method getMethod() {
         return method;
@@ -47,5 +49,13 @@ public class MvcEntity {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public Parameter[] getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(Parameter[] parameters) {
+        this.parameters = parameters;
     }
 }

@@ -6,6 +6,7 @@ import org.messtin.framework.core.annotation.Bean;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.Arrays;
 
 /**
@@ -28,8 +29,16 @@ public final class AnnotationUtil {
      * @param method
      * @return if the {@link Method} has {@link Bean} annotation.
      */
-    public static boolean hasBeanAnnotation(Method method){
+    public static boolean hasBeanAnnotation(Method method) {
         return method.isAnnotationPresent(Bean.class);
+    }
+
+    /**
+     * @param parameter
+     * @return if the {@link Parameter} has {@link Bean} annotation.
+     */
+    public static boolean hasBeanAnnotation(Parameter parameter) {
+        return parameter.isAnnotationPresent(Bean.class);
     }
 
     /**
@@ -52,7 +61,7 @@ public final class AnnotationUtil {
      * @param clazz
      * @return if the class have bean method.
      */
-    public static boolean hasBeanMethod(Class<?> clazz){
+    public static boolean hasBeanMethod(Class<?> clazz) {
         Method[] methods = clazz.getDeclaredMethods();
         return Arrays.stream(methods)
                 .anyMatch(AnnotationUtil::hasBeanAnnotation);

@@ -17,12 +17,14 @@ public class MesstinServletListener implements ServletContextListener {
     private static final String SCAN_PACKET = "scanPacket";
 
     /**
-     * Do two things.
+     * Do three things.
      * 1. add {@link WebAppLoader} into loader map.
      * 2. get packages we need scan.
+     * 3. init the whole project.
      *
      * @param event the init event.
      */
+    @Override
     public void contextInitialized(ServletContextEvent event) {
 
         Init.addLoader(WebAppLoader.class);
@@ -41,6 +43,7 @@ public class MesstinServletListener implements ServletContextListener {
     }
 
 
+    @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
         System.out.println("MesstinServletListener#contextDestroyed is called.");
     }

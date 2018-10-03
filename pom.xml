@@ -18,6 +18,7 @@
         <log4j2.version>2.9.1</log4j2.version>
         <junit.version>3.8.1</junit.version>
         <cglib.version>3.2.8</cglib.version>
+        <noson.version>1.0.7</noson.version>
     </properties>
 
     <dependencies>
@@ -36,6 +37,12 @@
             <artifactId>cglib</artifactId>
             <version>${cglib.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.gitee.ainilili</groupId>
+            <artifactId>noson</artifactId>
+            <version>${noson.version}</version>
+        </dependency>
+
 
         <dependency>
             <groupId>junit</groupId>
