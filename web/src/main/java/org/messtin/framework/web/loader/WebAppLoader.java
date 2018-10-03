@@ -1,5 +1,7 @@
 package org.messtin.framework.web.loader;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.messtin.framework.core.container.BeanContainer;
 import org.messtin.framework.core.loader.iface.MesstinLoader;
 import org.messtin.framework.core.util.StringUtil;
@@ -16,13 +18,15 @@ import java.util.Set;
 /**
  * The loader for controller.
  * It will load all controller into {@link MappingContainer}.
- *
+ * <p>
  * Will build into {@link MvcEntity} according to its bean, {@link Method}...
  * And then put into into {@link MappingContainer}.
  *
  * @author majinliang
  */
 public class WebAppLoader implements MesstinLoader {
+
+    private static final Logger logger = LogManager.getLogger(WebAppLoader.class);
 
     @Override
     public void load(Set<Class<?>> clazzs) throws IllegalAccessException, InstantiationException {
@@ -68,6 +72,8 @@ public class WebAppLoader implements MesstinLoader {
                 mvcEntity.setMethod(method);
                 mvcEntity.setAdapter(adapter.newInstance());
                 mvcEntity.setParameters(method.getParameters());
+
+                logger.info("Add {} >> MappingContainer", mvcEntity);
                 MappingContainer.add(mvcEntity);
             }
         }

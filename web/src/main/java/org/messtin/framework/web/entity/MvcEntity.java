@@ -4,6 +4,7 @@ import org.messtin.framework.web.adapter.iface.Adapter;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.util.Arrays;
 
 /**
  * The entity for mvc.
@@ -57,5 +58,16 @@ public class MvcEntity {
 
     public void setParameters(Parameter[] parameters) {
         this.parameters = parameters;
+    }
+
+    @Override
+    public String toString() {
+        return "MvcEntity{" +
+                "method=" + method +
+                ", bean=" + bean +
+                ", adapter=" + adapter +
+                ", path='" + path + '\'' +
+                ", parameters=" + Arrays.toString(parameters) +
+                '}';
     }
 }

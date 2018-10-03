@@ -1,5 +1,7 @@
 package org.messtin.framework.web.listener;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.messtin.framework.core.Core;
 import org.messtin.framework.core.Init;
 import org.messtin.framework.core.config.Constants;
@@ -7,6 +9,7 @@ import org.messtin.framework.web.loader.WebAppLoader;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import java.util.Arrays;
 
 /**
  * When tomcat init the whole project, will run this class firstly.
@@ -14,6 +17,7 @@ import javax.servlet.ServletContextListener;
  * @author majinliang
  */
 public class MesstinServletListener implements ServletContextListener {
+    private static final Logger logger = LogManager.getLogger(MesstinServletListener.class);
     private static final String SCAN_PACKET = "scanPacket";
 
     /**
@@ -26,6 +30,7 @@ public class MesstinServletListener implements ServletContextListener {
      */
     @Override
     public void contextInitialized(ServletContextEvent event) {
+        logger.info("Start initialize servlet context.");
 
         Init.addLoader(WebAppLoader.class);
 
@@ -36,7 +41,9 @@ public class MesstinServletListener implements ServletContextListener {
         }
 
         try {
+            logger.info("Will scan package: ", Arrays.toString(packages));
             Core.init(packages);
+            logger.info("Success initialized servlet context.");
         } catch (Exception e) {
             e.printStackTrace();
         }

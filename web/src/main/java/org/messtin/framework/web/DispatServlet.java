@@ -1,5 +1,7 @@
 package org.messtin.framework.web;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.messtin.framework.core.config.Constants;
 import org.messtin.framework.core.exception.IllegalBeanNameException;
 import org.messtin.framework.core.util.ClassUtil;
@@ -22,8 +24,11 @@ import java.lang.reflect.InvocationTargetException;
  */
 public class DispatServlet extends HttpServlet {
 
+    private static final Logger logger = LogManager.getLogger(DispatServlet.class);
+
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+        logger.info("Handling request from: ", request.getRemoteHost());
 
         request.setCharacterEncoding(Constants.UTF_8);
         response.setCharacterEncoding(Constants.UTF_8);
@@ -43,6 +48,7 @@ public class DispatServlet extends HttpServlet {
                 String jsonResult = Noson.reversal(result);
                 response.getWriter().write(jsonResult);
             }
+            logger.info("Success handle request from: ", request.getRemoteHost());
             return;
         } catch (IllegalAccessException e) {
             e.printStackTrace();

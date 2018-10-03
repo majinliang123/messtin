@@ -2,6 +2,8 @@ package org.messtin.framework.web.adapter;
 
 import com.sun.deploy.net.HttpRequest;
 import com.sun.deploy.net.HttpResponse;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.messtin.framework.core.annotation.Bean;
 import org.messtin.framework.core.container.BeanContainer;
 import org.messtin.framework.core.exception.IllegalBeanNameException;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Parameter;
+import java.util.Arrays;
 
 /**
  * Build method params.
@@ -28,6 +31,7 @@ import java.lang.reflect.Parameter;
  * @author majinliang
  */
 public class FormMealAdapt implements Adapter {
+    private static final Logger logger = LogManager.getLogger(FormMealAdapt.class);
 
     @Override
     public Object[] adapt(MvcEntity mvcEntity, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IllegalBeanNameException {
@@ -69,6 +73,7 @@ public class FormMealAdapt implements Adapter {
             }
             params[i] = RequestUtil.getParam(request, paramName);
         }
+        logger.info("Adapt {} >> {}", mvcEntity, Arrays.toString(params));
         return params;
     }
 }
