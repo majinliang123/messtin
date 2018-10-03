@@ -8,8 +8,11 @@ import org.messtin.framework.core.proxy.CGlibProxy;
 import org.messtin.framework.core.util.ClassUtil;
 import org.messtin.framework.core.util.StringUtil;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * The container of bean.
@@ -32,7 +35,7 @@ public final class BeanContainer {
      * @param clazzName
      * @param instance
      */
-    public static void put(String beanName, String clazzName, Object instance){
+    public static void put(String beanName, String clazzName, Object instance) {
         Map<String, Object> beanMap = beanContainer.get(beanName);
         if (beanMap == null) {
             beanMap = new HashMap<>();
@@ -105,5 +108,18 @@ public final class BeanContainer {
         }
         String clazzName = clazz.getName();
         return beanMap.get(clazzName);
+    }
+
+    /**
+     * Get all bean in {@link #beanContainer}
+     *
+     * @return list of bean object.
+     */
+    public static List<Object> getBeans() {
+        return beanContainer.values()
+                .stream()
+                .map(Map::values)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
     }
 }
