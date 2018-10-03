@@ -1,7 +1,5 @@
 package org.messtin.framework.web.adapter;
 
-import com.sun.deploy.net.HttpRequest;
-import com.sun.deploy.net.HttpResponse;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.messtin.framework.core.annotation.Bean;
@@ -46,11 +44,11 @@ public class FormMealAdapt implements Adapter {
             Class<?> paramType = param.getType();
             String paramName = param.getName();
 
-            if (paramType.isAssignableFrom(HttpRequest.class)) {
+            if (paramType.isAssignableFrom(HttpServletRequest.class)) {
                 params[i] = request;
                 continue;
             }
-            if (paramType.isAssignableFrom(HttpResponse.class)) {
+            if (paramType.isAssignableFrom(HttpServletResponse.class)) {
                 params[i] = response;
                 continue;
             }
