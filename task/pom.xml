@@ -12,4 +12,14 @@
     <artifactId>task</artifactId>
 
 
+    <properties>
+        <messtin.version>1.0-SNAPSHOT</messtin.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.messtin</groupId>
+            <artifactId>core</artifactId>
+            <version>${messtin.version}</version>
+        </dependency>
+    </dependencies>
 </project>

@@ -12,7 +12,9 @@ import java.lang.reflect.Method;
 import java.util.Set;
 
 /**
- * Use to run post construct function which has {@link } after bean is created.
+ * Use to run post construct function which has
+ * {@link org.messtin.framework.core.annotation.PostConstruct}
+ * after bean is created.
  *
  * @author majinliang
  */
