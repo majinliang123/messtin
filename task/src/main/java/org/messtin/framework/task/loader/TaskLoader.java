@@ -1,5 +1,7 @@
 package org.messtin.framework.task.loader;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.messtin.framework.core.annotation.Bean;
 import org.messtin.framework.core.container.BeanContainer;
 import org.messtin.framework.core.exception.IllegalBeanNameException;
@@ -20,6 +22,7 @@ import java.util.Set;
  * @author majinliang
  */
 public class TaskLoader implements MesstinLoader {
+    private static final Logger logger = LogManager.getLogger(TaskLoader.class);
 
     @Override
     public void load(Set<Class<?>> clazzs) throws IllegalBeanNameException {
@@ -52,6 +55,8 @@ public class TaskLoader implements MesstinLoader {
                 task.setBean(bean);
                 task.setMethod(method);
                 task.setExpression(expression);
+
+                logger.info("load {} >> TaskContainer", task.toString());
                 TaskContainer.add(task);
             }
         }

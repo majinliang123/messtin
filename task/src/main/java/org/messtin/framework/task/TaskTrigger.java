@@ -1,5 +1,7 @@
 package org.messtin.framework.task;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.messtin.framework.core.annotation.Bean;
 import org.messtin.framework.core.annotation.PostConstruct;
 import org.messtin.framework.task.container.TaskContainer;
@@ -20,6 +22,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Bean("TaskTrigger")
 public class TaskTrigger {
+    private static final Logger logger = LogManager.getLogger(TaskTrigger.class);
 
     @PostConstruct
     public void taskInit() {
@@ -36,6 +39,7 @@ public class TaskTrigger {
 
         TaskPool.schedule(() -> {
             try {
+                logger.info("Will run task: {} after {} millis.", entity.toString(), delay);
                 Method method = entity.getMethod();
                 Object bean = entity.getBean();
 

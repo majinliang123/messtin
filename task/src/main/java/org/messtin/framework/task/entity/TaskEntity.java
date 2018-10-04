@@ -36,4 +36,13 @@ public class TaskEntity {
     public void setExpression(String expression) {
         this.expression = expression;
     }
+
+    @Override
+    public String toString() {
+        return "TaskEntity{" +
+                "bean=" + bean +
+                ", method=" + method +
+                ", expression='" + expression + '\'' +
+                '}';
+    }
 }
