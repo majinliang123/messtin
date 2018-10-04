@@ -3,6 +3,7 @@ package org.messtin.framework.core.util;
 import org.messtin.framework.core.annotation.Aspect;
 import org.messtin.framework.core.annotation.Autowired;
 import org.messtin.framework.core.annotation.Bean;
+import org.messtin.framework.core.annotation.PostConstruct;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -55,6 +56,28 @@ public final class AnnotationUtil {
      */
     public static boolean hasAspectAnnotation(Class<?> clazz) {
         return clazz.isAnnotationPresent(Aspect.class);
+    }
+
+    /**
+     * @param clazz
+     * @return if the {@link Method} in {@link Class} has {@link PostConstruct} annotation.
+     * And the {@link Method} need has no parameter.
+     */
+    public static boolean hasPostConstructAnnotation(Class<?> clazz) {
+        return Arrays.stream(clazz.getDeclaredMethods())
+                .anyMatch(method ->
+                        method.isAnnotationPresent(PostConstruct.class) &&
+                                method.getParameterCount() == 0);
+    }
+
+    /**
+     * @param method
+     * @return if the {@link Method} has {@link PostConstruct} annotation.
+     * And the {@link Method} need has no parameter.
+     */
+    public static boolean hasPostConstructAnnotation(Method method) {
+        return method.isAnnotationPresent(PostConstruct.class) &&
+                method.getParameterCount() == 0;
     }
 
     /**

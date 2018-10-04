@@ -2,10 +2,7 @@ package org.messtin.framework.core;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.messtin.framework.core.loader.AspectLoader;
-import org.messtin.framework.core.loader.BeanLoader;
-import org.messtin.framework.core.loader.FieldLoader;
-import org.messtin.framework.core.loader.MethodLoader;
+import org.messtin.framework.core.loader.*;
 import org.messtin.framework.core.loader.iface.MesstinLoader;
 import org.messtin.framework.core.util.ClassUtil;
 
@@ -42,6 +39,9 @@ public final class Init {
                 put(3, new ArrayList<Class<? extends MesstinLoader>>() {{
                     add(FieldLoader.class);
                 }});
+                put(Integer.MAX_VALUE, new ArrayList<Class<? extends MesstinLoader>>() {{
+                    add(PostConstructLoader.class);
+                }});
             }};
 
     /**
@@ -52,7 +52,7 @@ public final class Init {
      * @param loader
      */
     public static void addLoader(Class<? extends MesstinLoader> loader) {
-        addLoader(Integer.MAX_VALUE, loader);
+        addLoader(Integer.MAX_VALUE - 1, loader);
     }
 
     /**

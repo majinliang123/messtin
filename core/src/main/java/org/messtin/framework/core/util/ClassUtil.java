@@ -151,6 +151,5 @@ public final class ClassUtil {
             return true;
         }
         return false;
-
     }
 }
