@@ -12,6 +12,7 @@
         <module>core</module>
         <module>web</module>
         <module>task</module>
+        <module>jdbc</module>
     </modules>
 
     <properties>

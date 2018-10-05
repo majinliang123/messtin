@@ -24,7 +24,7 @@ public class FieldLoader implements MesstinLoader {
     public void load(Set<Class<?>> clazzs) throws IllegalBeanNameException, IllegalAccessException {
         for (Class<?> clazz : clazzs) {
             if (!AnnotationUtil.hasBeanAnnotation(clazz)) {
-                return;
+                continue;
             }
             Field[] fields = clazz.getDeclaredFields();
             Object bean = BeanContainer.get(clazz);

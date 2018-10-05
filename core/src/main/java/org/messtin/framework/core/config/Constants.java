@@ -12,6 +12,7 @@ public interface Constants {
     String DOT = ".";
     String SLASH = "/";
     String COMMA = ",";
+    String UNDERSCORE = "_";
 
     String UTF_8 = "UTF-8";
 }

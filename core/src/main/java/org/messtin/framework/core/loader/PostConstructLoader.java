@@ -43,6 +43,9 @@ public class PostConstructLoader implements MesstinLoader {
                 if (!AnnotationUtil.hasPostConstructAnnotation(method)) {
                     continue;
                 }
+                if (!method.isAccessible()) {
+                    method.setAccessible(true);
+                }
                 method.invoke(bean, new Object[0]);
             }
         }
