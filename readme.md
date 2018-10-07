@@ -2,10 +2,10 @@
 A light weight framework like spring.
 
 ### Module
-- [core module](/core/readme.md): support aop, ioc.
-- [jdbc module](/jdbc/readme.md): support simple orm.
-- [task module](/task/readme.md): support linux crontab like task.
-- [web module](/web/readme.md): support for web project like spring mvc.
+- [core module](/core): support aop, ioc.
+- [jdbc module](/jdbc): support simple orm.
+- [task module](/task): support linux crontab like task.
+- [web module](/web): support for web project like spring mvc.
 
 
 ### TODO:
