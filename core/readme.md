@@ -72,7 +72,7 @@ public class AirConditionAspect extends AbstractAspect {
     }
 
     /**
-     *
+     * Run after getPrice method run.
      */
     @Override
     public Object afterMethod(Object result) {
