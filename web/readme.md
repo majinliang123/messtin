@@ -9,13 +9,13 @@ Support web like spring mvc.
 <context-param>
 	<param-name>scanPacket</param-name>
 	<!-- use comma to split the packages -->
-	<param-value>org.coody.czone</param-value>
+	<param-value>org.messtin.framework.example</param-value>
 </context-param>
 <!-- set loaders you want to use -->
 <context-param>
 	<param-name>initLoader</param-name>
 	<!-- use comma to split the loaders -->
-	<param-value>org.coody.framework.web.loader.WebAppLoader,org.coody.framework.task.loader.TaskLoader</param-value>
+	<param-value>org.messtin.framework.web.loader.WebAppLoader,org.messtin.framework.task.loader.TaskLoader</param-value>
 </context-param>
 <!-- set listener -->
 <listener>
